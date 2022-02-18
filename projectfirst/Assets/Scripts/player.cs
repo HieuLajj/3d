@@ -7,6 +7,8 @@ public class player : MonoBehaviour
     Rigidbody rb;
     [SerializeField] float movementSpeed = 6f;
     [SerializeField] float jumpForce=  5f;
+    [SerializeField] LayerMask ground;
+    [SerializeField]Transform groundCheck;
     int wholeNumber =3;
     float decimalNumber =3.45f;
     string text ="blabla";
@@ -23,9 +25,13 @@ public class player : MonoBehaviour
         float horizontalInput = Input.GetAxis("Horizontal");
         float verticalInput = Input.GetAxis("Vertical");
         rb.velocity = new Vector3(horizontalInput*movementSpeed, rb.velocity.y ,verticalInput*movementSpeed);
-        if (Input.GetButtonDown("Jump")){
+        if (Input.GetButtonDown("Jump")&& check()){
               rb.velocity = new Vector3(rb.velocity.x,jumpForce,rb.velocity.z);
         }
+
          
+    }
+        bool check(){
+        return Physics.CheckSphere(groundCheck.position,.1f,ground);
     }
 }
