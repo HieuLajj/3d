@@ -26,10 +26,19 @@ public class player : MonoBehaviour
         float verticalInput = Input.GetAxis("Vertical");
         rb.velocity = new Vector3(horizontalInput*movementSpeed, rb.velocity.y ,verticalInput*movementSpeed);
         if (Input.GetButtonDown("Jump")&& check()){
-              rb.velocity = new Vector3(rb.velocity.x,jumpForce,rb.velocity.z);
+              jump();
         }
 
          
+    }
+    void jump(){
+         rb.velocity = new Vector3(rb.velocity.x,jumpForce,rb.velocity.z);
+    }
+    private void OnCollisionEnter(Collision other) {
+        if(other.gameObject.CompareTag("enemyhead")){
+            Destroy(other.transform.parent.gameObject);
+            jump();
+        }
     }
         bool check(){
         return Physics.CheckSphere(groundCheck.position,.1f,ground);
