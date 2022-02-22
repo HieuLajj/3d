@@ -9,11 +9,12 @@ public class player : MonoBehaviour
     [SerializeField] float jumpForce=  5f;
     [SerializeField] LayerMask ground;
     [SerializeField]Transform groundCheck;
+    [SerializeField] AudioSource jumpSound;
     int wholeNumber =3;
     float decimalNumber =3.45f;
     string text ="blabla";
     bool condition = false;
-    // Start is called before the first frame update
+    
     void Start()
     {
         rb =   GetComponent<Rigidbody>();
@@ -33,6 +34,7 @@ public class player : MonoBehaviour
     }
     void jump(){
          rb.velocity = new Vector3(rb.velocity.x,jumpForce,rb.velocity.z);
+         jumpSound.Play();
     }
     private void OnCollisionEnter(Collision other) {
         if(other.gameObject.CompareTag("enemyhead")){
