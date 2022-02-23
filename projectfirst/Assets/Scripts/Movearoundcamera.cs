@@ -22,7 +22,7 @@ public class Movearoundcamera : MonoBehaviour
         Vector3 nextRotation = new Vector3(_rotationY,_rotationX);
         _currentRotation = Vector3.SmoothDamp(_currentRotation, nextRotation,ref smoothVelocity, smoothTime);
         transform.localEulerAngles = _currentRotation;
-        transform.position = _target.position - transform.forward* _distanceFromTarget;
+       // transform.position = _target.position - transform.forward* _distanceFromTarget;
         
     }
 }
